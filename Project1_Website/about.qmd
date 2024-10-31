@@ -1,0 +1,11 @@
+---
+title: "About"
+---
+
+## Education
+
+I recently graduated from Lehigh University with a BS in population health and a minor in probability and statistics.
+
+## Research Experience
+
+In the past, I have completed research in many fields, including writing a paper about the Moroccan healthcare system and co-authoring a journal about forecasting trajectories of infectious diseases by combining forecasts from computational models and human judgment. I also had to complete a capstone project while at Lehigh and for this project I created an exposure measurement based on a survey that was conducted to collect demographic and personal information on American Indian individuals and their experience with COVID-19.

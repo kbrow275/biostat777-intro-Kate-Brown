@@ -1,0 +1,34 @@
+---
+title: "Example Analysis"
+---
+
+- Question I aim to answer
+- Intended audience
+- where the data is from https://www.kaggle.com/datasets/nishaanamin/march-madness-data
+
+```{r}
+X538_Ratings
+
+newdf = X538_Ratings%>%
+  mutate(roundmade = case_when(
+      round == 68 ~ 1, 
+      round == 64 ~ 2, 
+      round == 32 ~ 3, 
+      round == 16 ~ 4, 
+      round == 8 ~ 5, 
+      round == 4 ~ 6, 
+      round == 2 ~ 7, 
+      
+      
+  ))
+
+
+df <- df %>%
+  mutate(new_col = case_when(
+    original_col == 64 ~ "first",
+    TRUE ~ as.character(original_col)  # Keep original values otherwise
+  ))
+
+
+```
+

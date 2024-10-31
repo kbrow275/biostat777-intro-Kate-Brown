@@ -1,0 +1,30 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Introduction",
+    "section": "",
+    "text": "My name is Kate Brown, and this is my website. I am a first-year ScM student in Biostatistics at the Bloomberg School of Public Health at Johns Hopkins. In my free time, I enjoy reading, traveling, and spending time outside."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "I recently graduated from Lehigh University with a BS in population health and a minor in probability and statistics."
+  },
+  {
+    "objectID": "about.html#education",
+    "href": "about.html#education",
+    "title": "About",
+    "section": "",
+    "text": "I recently graduated from Lehigh University with a BS in population health and a minor in probability and statistics."
+  },
+  {
+    "objectID": "about.html#research-experience",
+    "href": "about.html#research-experience",
+    "title": "About",
+    "section": "Research Experience",
+    "text": "Research Experience\nIn the past, I have completed research in many fields, including writing a paper about the Moroccan healthcare system and co-authoring a journal about forecasting trajectories of infectious diseases by combining forecasts from computational models and human judgment. I also had to complete a capstone project while at Lehigh and for this project I created an exposure measurement based on a survey that was conducted to collect demographic and personal information on American Indian individuals and their experience with COVID-19."
+  }
+]
