@@ -2,33 +2,77 @@
 title: "Example Analysis"
 ---
 
-- Question I aim to answer
-- Intended audience
-- where the data is from https://www.kaggle.com/datasets/nishaanamin/march-madness-data
+- Question I aim to answer is to when the best time to take a flight is from BWI.
+- Intended audience people planning trips from BWI airport.
+- where the data is from https://www.transtats.bts.gov/ontime/departures.aspx
 
 ```{r}
-X538_Ratings
+library(tidyverse)
+library(ggplot2)
 
-newdf = X538_Ratings%>%
-  mutate(roundmade = case_when(
-      round == 68 ~ 1, 
-      round == 64 ~ 2, 
-      round == 32 ~ 3, 
-      round == 16 ~ 4, 
-      round == 8 ~ 5, 
-      round == 4 ~ 6, 
-      round == 2 ~ 7, 
-      
-      
-  ))
-
-
-df <- df %>%
-  mutate(new_col = case_when(
-    original_col == 64 ~ "first",
-    TRUE ~ as.character(original_col)  # Keep original values otherwise
-  ))
+data = read.csv("Detailed_Statistics_Departures.csv")
 
 
 ```
+```{r}
+data = data %>%
+  filter(!is.na(Destination.Airport) & Destination.Airport != "") %>%
+  filter (Destination.Airport != "SJU")
+
+
+df <- data %>%
+  mutate(Date = mdy(Date..MM.DD.YYYY.),  
+         year = year(Date),               
+         month = month(Date),            
+         year_month = format(Date, "%Y-%m")) %>%  
+  rename(Date = Date) %>%                  
+  filter(year %in% c(2020, 2021))          
+
+
+regional_data = df %>%
+  mutate(Region = case_when(
+    Destination.Airport %in% c("BOS","LAX") ~"northeast",
+    Destination.Airport %in% c("AUS", "BNA", "ATL", "CHS", "CLT", "DFW", "FLL", "IAN", "JAX", "MIA", "MYR","RDU", "RSW", "SAT", "SDF", "IAH", "MCO")   ~ "south", 
+    Destination.Airport %in% c("DTW","MCI","MKE", "MSP", "MSY", "ORD")~ "midwest", 
+    Destination.Airport %in% c("DEN", "LAS", "OAK", "PDX", "SAN", "SEA", "SJC", "SMF", "TPA")  ~ "west"
+  ))
+```
+
+
+```{r}
+grouped_summary = regional_data %>%
+  group_by(Region) %>%
+  summarize(count = n())
+
+
+# Create a pie chart
+pie_data =  grouped_summary %>%
+  mutate(fraction = count / sum(count), 
+         cumulative = cumsum(fraction), 
+         ymin = lag(cumulative, default = 0),  
+         ymax = cumulative)  
+ggplot(pie_data, aes(ymin = ymin, ymax = ymax, xmax = 4, xmin = 0, fill = Region)) +
+  geom_rect() +  
+  coord_polar("y") +  
+  labs(title = "Flights in 2020 and 2021 from BWI to \neach Region of the US") + theme_void()
+
+```
+
+```{r}
+groupby_month = regional_data %>%
+  group_by(month) %>%
+  summarize(count = n())
+
+groupby_month <- groupby_month %>%
+  mutate(month = factor(month, levels = 1:12, labels = month.abb)) 
+
+ggplot(groupby_month, aes(x=month, y=count)) + geom_bar(stat = "identity", fill = "purple") + labs(title = "Number of Flights from BWI for each month in 2020 \nand 2021 combined",x = "Month", y = "Number of Flights")
+
+
+```
+
+
+references
+-https://www.fla-shop.com/resources/us-regions/
+-https://www.transtats.bts.gov/ontime/departures.aspx
 
