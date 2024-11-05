@@ -54,7 +54,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -185,7 +205,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Question I aim to answer is: What is the best time to take a trip from BWI to maximize flight options?</li>
 <li>The intended audience for this data analysis includes individuals planning a trip from BWI airport on spirit airlines.</li>
-<li>The original data is from transtats and it provided resources to download flight information from any airport based on a year or month selected. https://www.transtats.bts.gov/ontime/departures.aspx</li>
+<li>The original data is from transtats and it provided resources to download flight information from any airport based on a year or month selected. <span class="citation" data-cites="transtats_departures">Transportation Statistics (<a href="#ref-transtats_departures" role="doc-biblioref">2023</a>)</span></li>
 </ul>
 <p><img src="spiritairplane.png" class="img-fluid" width="250"></p>
 <div class="callout callout-style-simple callout-note callout-titled">
@@ -478,7 +498,7 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>States are split into regions based on the map below. <img src="regionmap.png" class="img-fluid" width="250"></p>
+<p>States are split into regions based on the map below. <img src="regionmap.png" class="img-fluid" width="250"> <span class="citation" data-cites="fla_regions">Shop (<a href="#ref-fla_regions" role="doc-biblioref">2023</a>)</span></p>
 </div>
 </div>
 <div class="cell">
@@ -587,7 +607,7 @@ Important
 </section>
 <section id="conclusion" class="level1">
 <h1>Conclusion</h1>
-<p>The three plots created help the audience decide when and where is the best place to travel from BWI Airport on Spirit Airlines. The analysis was conducted based on flight information from 2020 and 2021. The pie chart shows that the majority of flights (70.9%) from BWI in 2020 and 2021 were to the southern region of the U.S. It can be observed that July and March have the most flights available. The faceted plot indicates that there are fewer than 200 flights each month to the Midwest, Northeast, and West regions, while the southern region consistently has more flights available each month. The last graph, faceted by month, reveals that January, February, March, April, May, July, November, and December all have more flights available in the PM than in the AM.</p>
+<p>The three plots created help the audience decide when and where is the best place to travel from BWI Airport on Spirit Airlines. The analysis was conducted based on flight information from 2020 and 2021. The pie chart shows that the majority of flights (70.9%) from BWI in 2020 and 2021 were to the southern region of the U.S. It can be observed that July and March have the most flights available.This closely aligns with findings from the article on WTOP news about July being the busiest month that BWI has experiences (<span class="citation" data-cites="WTOP2024">WTOP (<a href="#ref-WTOP2024" role="doc-biblioref">2024</a>)</span>). The faceted plot indicates that there are fewer than 200 flights each month to the Midwest, Northeast, and West regions, while the southern region consistently has more flights available each month. The last graph, faceted by month, reveals that January, February, March, April, May, July, November, and December all have more flights available in the PM than in the AM.</p>
 <p>To maximize flight options, the audience should consider traveling to a city in the southern region in March or July during the PM hours.</p>
 </section>
 <section id="functions-used" class="level1">
@@ -596,9 +616,20 @@ Important
 <p>ggplot2 package: geom_bar, geom_rect, geom_col</p>
 
 
+
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-fla_regions" class="csl-entry" role="listitem">
+Shop, FLA. 2023. <span>“US Regions.”</span> <a href="https://www.fla-shop.com/resources/us-regions/">https://www.fla-shop.com/resources/us-regions/</a>.
+</div>
+<div id="ref-transtats_departures" class="csl-entry" role="listitem">
+Transportation Statistics, Bureau of. 2023. <span>“On-Time Flight Statistics: Departures.”</span> <a href="https://www.transtats.bts.gov/ontime/departures.aspx">https://www.transtats.bts.gov/ontime/departures.aspx</a>.
+</div>
+<div id="ref-WTOP2024" class="csl-entry" role="listitem">
+WTOP. 2024. <span>“BWI Marshall’s Busiest Month Ever.”</span> September 2024. <a href="https://wtop.com/business-finance/2024/09/bwi-marshalls-busiest-month-ever/">https://wtop.com/business-finance/2024/09/bwi-marshalls-busiest-month-ever/</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -691,7 +722,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
+      var filterRegex = new RegExp("https:\/\/b50d2da2-caaf-46b8-a872-841f1148ff45\.netlify\.app\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

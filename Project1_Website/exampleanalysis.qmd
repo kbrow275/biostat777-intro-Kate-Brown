@@ -4,7 +4,7 @@ title: "Example Analysis"
 # Basic Analysis Information
 - Question I aim to answer is: What is the best time to take a trip from BWI to maximize flight options?
 - The intended audience for this data analysis includes individuals planning a trip from BWI airport on spirit airlines.
-- The original data is from transtats and it provided resources to download flight information from any airport based on a year or month selected. https://www.transtats.bts.gov/ontime/departures.aspx
+- The original data is from transtats and it provided resources to download flight information from any airport based on a year or month selected. @transtats_departures
 
 ![](spiritairplane.png){width=250}
 
@@ -100,6 +100,7 @@ ggplot(pie_data, aes(ymin = ymin, ymax = ymax, xmax = 4, xmin = 0, fill = Region
 
 States are split into regions based on the map below.
 ![](regionmap.png){width=250}
+@fla_regions
 :::
 
 
@@ -157,7 +158,7 @@ ggplot(time_of_day, aes(y = time_of_flight_categorized)) + geom_bar(fill = "oran
 
 
 # Conclusion
-The three plots created help the audience decide when and where is the best place to travel from BWI Airport on Spirit Airlines. The analysis was conducted based on flight information from 2020 and 2021. The pie chart shows that the majority of flights (70.9%) from BWI in 2020 and 2021 were to the southern region of the U.S. It can be observed that July and March have the most flights available. The faceted plot indicates that there are fewer than 200 flights each month to the Midwest, Northeast, and West regions, while the southern region consistently has more flights available each month. The last graph, faceted by month, reveals that January, February, March, April, May, July, November, and December all have more flights available in the PM than in the AM.
+The three plots created help the audience decide when and where is the best place to travel from BWI Airport on Spirit Airlines. The analysis was conducted based on flight information from 2020 and 2021. The pie chart shows that the majority of flights (70.9%) from BWI in 2020 and 2021 were to the southern region of the U.S. It can be observed that July and March have the most flights available.This closely aligns with findings from the article on WTOP news about July being the busiest month that BWI has experiences (@WTOP2024). The faceted plot indicates that there are fewer than 200 flights each month to the Midwest, Northeast, and West regions, while the southern region consistently has more flights available each month. The last graph, faceted by month, reveals that January, February, March, April, May, July, November, and December all have more flights available in the PM than in the AM.
 
 To maximize flight options, the audience should consider traveling to a city in the southern region in March or July during the PM hours.
 
