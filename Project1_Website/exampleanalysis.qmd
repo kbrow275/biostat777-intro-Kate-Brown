@@ -1,19 +1,41 @@
 ---
 title: "Example Analysis"
 ---
+# Basic Analysis Information
+- Question I aim to answer is: What is the best time to take a trip from BWI to maximize flight options?
+- The intended audience for this data analysis includes individuals planning a trip from BWI airport on spirit airlines.
+- The original data is from transtats and it provided resources to download flight information from any airport based on a year or month selected. https://www.transtats.bts.gov/ontime/departures.aspx
 
-- Question I aim to answer is to when the best time to take a flight is from BWI.
-- Intended audience people planning trips from BWI airport.
-- where the data is from https://www.transtats.bts.gov/ontime/departures.aspx
+![](spiritairplane.png){width=250}
+
+::: {.callout-note appearance="simple"}
+
+## Note
+
+This analysis was strictly done about flights on spirit airlines. BWI offers flights on other airlines.
+:::
+
 
 ```{r}
 library(tidyverse)
 library(ggplot2)
+library(lubridate)
 
-data = read.csv("Detailed_Statistics_Departures.csv")
+data = read.csv("Detailed_Statistics_Departures (1).csv")
 
 
 ```
+# Data Dictionary
+```{r}
+library(datadictionary)
+library(knitr)
+data$Carrier.Code = as.factor(data$Carrier.Code)
+
+kable(create_dictionary(data), format = "simple", caption = "Data Dictionary of the Airport dataset")
+```
+
+# Data Analysis
+
 ```{r}
 data = data %>%
   filter(!is.na(Destination.Airport) & Destination.Airport != "") %>%
@@ -26,15 +48,15 @@ df <- data %>%
          month = month(Date),            
          year_month = format(Date, "%Y-%m")) %>%  
   rename(Date = Date) %>%                  
-  filter(year %in% c(2020, 2021))          
+  filter(year %in% c(2020, 2021)) 
 
 
 regional_data = df %>%
   mutate(Region = case_when(
-    Destination.Airport %in% c("BOS","LAX") ~"northeast",
-    Destination.Airport %in% c("AUS", "BNA", "ATL", "CHS", "CLT", "DFW", "FLL", "IAN", "JAX", "MIA", "MYR","RDU", "RSW", "SAT", "SDF", "IAH", "MCO")   ~ "south", 
-    Destination.Airport %in% c("DTW","MCI","MKE", "MSP", "MSY", "ORD")~ "midwest", 
-    Destination.Airport %in% c("DEN", "LAS", "OAK", "PDX", "SAN", "SEA", "SJC", "SMF", "TPA")  ~ "west"
+    Destination.Airport %in% c("BOS","LAX") ~"Northeast",
+    Destination.Airport %in% c("AUS", "BNA", "ATL", "CHS", "CLT", "DFW", "FLL", "IAN", "JAX", "MIA", "MYR","RDU", "RSW", "SAT", "SDF", "IAH", "MCO")   ~ "South", 
+    Destination.Airport %in% c("DTW","MCI","MKE", "MSP", "MSY", "ORD")~ "Midwest", 
+    Destination.Airport %in% c("DEN", "LAS", "OAK", "PDX", "SAN", "SEA", "SJC", "SMF", "TPA")  ~ "West"
   ))
 ```
 
@@ -42,10 +64,24 @@ regional_data = df %>%
 ```{r}
 grouped_summary = regional_data %>%
   group_by(Region) %>%
-  summarize(count = n())
+  summarize(count = n()) %>%
+  arrange(desc(count))
+
+percentage_south = grouped_summary$count[1] / sum(grouped_summary$count)
+percentage_south
+```
 
 
-# Create a pie chart
+```{r}
+#| column: margin
+
+knitr::kable(
+  head(grouped_summary)
+)
+```
+
+
+```{r}
 pie_data =  grouped_summary %>%
   mutate(fraction = count / sum(count), 
          cumulative = cumsum(fraction), 
@@ -54,9 +90,18 @@ pie_data =  grouped_summary %>%
 ggplot(pie_data, aes(ymin = ymin, ymax = ymax, xmax = 4, xmin = 0, fill = Region)) +
   geom_rect() +  
   coord_polar("y") +  
-  labs(title = "Flights in 2020 and 2021 from BWI to \neach Region of the US") + theme_void()
+  labs(title = "Flights in 2020 and 2021 from BWI to \neach region of the US", subtitle = "All flights are on spirit airlines", caption = "This was created to see which regions have the most flights available from BWI on spirit airlines. ") + theme_void() + theme(plot.caption = element_text(hjust = 0.5)) + theme(plot.caption = element_text(size = 8)) 
 
 ```
+
+::: {.callout-important}
+
+## Important 
+
+States are split into regions based on the map below.
+![](regionmap.png){width=250}
+:::
+
 
 ```{r}
 groupby_month = regional_data %>%
@@ -66,13 +111,64 @@ groupby_month = regional_data %>%
 groupby_month <- groupby_month %>%
   mutate(month = factor(month, levels = 1:12, labels = month.abb)) 
 
-ggplot(groupby_month, aes(x=month, y=count)) + geom_bar(stat = "identity", fill = "purple") + labs(title = "Number of Flights from BWI for each month in 2020 \nand 2021 combined",x = "Month", y = "Number of Flights")
+
+ggplot(groupby_month, aes(x=month, y=count)) + geom_bar(stat = "identity", fill = "purple") + labs(title = "Number of Flights from BWI for each month \nin 2020 and 2021 combined",x = "Month", y = "Number of Flights", subtitle = "All flights are from spirit airlines", caption = "The graph was created to see which months have the most flights available")
 
 
 ```
 
 
-references
--https://www.fla-shop.com/resources/us-regions/
--https://www.transtats.bts.gov/ontime/departures.aspx
+```{r}
+groupby_facet = regional_data %>%
+  group_by(month, Region) %>%
+  summarize(Total_flights = n(), .groups = 'drop')
+```
+```{r}
+#| column: margin
+
+knitr::kable(
+  head(groupby_facet)
+)
+```
+
+```{r}
+
+
+ggplot(groupby_facet, aes(x = month, y = Total_flights)) + geom_col(fill = "lightblue") + facet_wrap(~Region) + labs(title = "Total Number of Flights in Each Month to each Region", y = "Total Number of Flights", x = "Month", caption = "Discover which month has the most flights available to the subsequent region.", subtitle = "Flights are on spirit airlines from 2020 and 2021") + scale_x_continuous(breaks = seq(min(groupby_facet$month), max(groupby_facet$month), by = 2))
+```
+```{r}
+time_of_day = regional_data %>%
+    mutate(Scheduled.departure.time = trimws(as.character(Scheduled.departure.time))) %>%
+    mutate(Scheduled.departure.time = parse_time(Scheduled.departure.time, "%H:%M"))
+```
+
+
+```{r}
+time_of_day = time_of_day %>%
+  mutate(time_of_flight_categorized = case_when(
+    hour(Scheduled.departure.time) < 12 ~ "AM",
+    hour(Scheduled.departure.time) >= 12 ~ "PM"
+  )) 
+
+
+ggplot(time_of_day, aes(y = time_of_flight_categorized)) + geom_bar(fill = "orange") + facet_wrap(~month) + labs(title = "Total Number of Flights in the AM and PM by month", y = "Time of Day of Flight", x = "Number of Flights", caption = "Discover which time of day there are the the most flights.", subtitle = "Flights are on spirit airlines from 2020 and 2021") 
+
+```
+
+
+# Conclusion
+The three plots created help the audience decide when and where is the best place to travel from BWI Airport on Spirit Airlines. The analysis was conducted based on flight information from 2020 and 2021. The pie chart shows that the majority of flights (70.9%) from BWI in 2020 and 2021 were to the southern region of the U.S. It can be observed that July and March have the most flights available. The faceted plot indicates that there are fewer than 200 flights each month to the Midwest, Northeast, and West regions, while the southern region consistently has more flights available each month. The last graph, faceted by month, reveals that January, February, March, April, May, July, November, and December all have more flights available in the PM than in the AM.
+
+To maximize flight options, the audience should consider traveling to a city in the southern region in March or July during the PM hours.
+
+
+
+
+# Functions used 
+dplyr/tidyr packages : mutate, group_by, summarize, filter, rename, arrange
+
+ggplot2 package: geom_bar, geom_rect, geom_col
+
+
+
 
