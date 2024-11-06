@@ -78,9 +78,9 @@ Go to the Discussion Board in CoursePlus and write a short post with a link (URL
 
 As you read the introductions from other folks in the class, feel free to comment/reply using Discussion board.
 
-- **Link to your GitHub repository**: [Delete this text and replace the text with the link to the public GitHub repo you created above for your website]
+- **Link to your GitHub repository**: https://github.com/kbrow275/biostat777-intro-Kate-Brown.git
 
-- **Link to your deployed website**: [Delete this and replace the text with the link to the public deployed website you created above]
+- **Link to your deployed website**: https://kbrow275.quarto.pub/project1_website/
 
 # Part 3
 
@@ -110,6 +110,8 @@ wget https://raw.githubusercontent.com/stephaniehicks/jhustatprogramming2024/ref
 2. Display the contents of the `students.csv` file using the `cat` command.
 
 ```{bash}
+
+
 cat students.csv
 
 ```

@@ -184,8 +184,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Go to the Discussion Board in CoursePlus and write a short post with a link (URL) to your website (and URL to the corresponding GitHub repository) that you created. Also, list the URLs below for the purposes of grading.</p>
 <p>As you read the introductions from other folks in the class, feel free to comment/reply using Discussion board.</p>
 <ul>
-<li><p><strong>Link to your GitHub repository</strong>: [Delete this text and replace the text with the link to the public GitHub repo you created above for your website]</p></li>
-<li><p><strong>Link to your deployed website</strong>: [Delete this and replace the text with the link to the public deployed website you created above]</p></li>
+<li><p><strong>Link to your GitHub repository</strong>: https://github.com/kbrow275/biostat777-intro-Kate-Brown.git</p></li>
+<li><p><strong>Link to your deployed website</strong>: https://kbrow275.quarto.pub/project1_website/</p></li>
 </ul>
 </section>
 </section>
@@ -209,23 +209,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://raw.githubusercontent.com/stephaniehicks/jhustatprogramming2024/refs/heads/main/projects/01-project/students.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>--2024-11-05 15:08:44--  https://raw.githubusercontent.com/stephaniehicks/jhustatprogramming2024/refs/heads/main/projects/01-project/students.csv
-Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 185.199.110.133, 185.199.108.133, 185.199.109.133, ...
-Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|185.199.110.133|:443... connected.
+<pre><code>--2024-11-06 08:47:33--  https://raw.githubusercontent.com/stephaniehicks/jhustatprogramming2024/refs/heads/main/projects/01-project/students.csv
+Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 2606:50c0:8003::154, 2606:50c0:8000::154, 2606:50c0:8001::154, ...
+Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|2606:50c0:8003::154|:443... connected.
 HTTP request sent, awaiting response... 200 OK
 Length: 257 [text/plain]
-Saving to: 'students.csv.1'
+Saving to: 'students.csv.3'
 
-     0K                                                       100% 15.0M=0s
+     0K                                                       100% 22.1M=0s
 
-2024-11-05 15:08:44 (15.0 MB/s) - 'students.csv.1' saved [257/257]</code></pre>
+2024-11-06 08:47:33 (22.1 MB/s) - 'students.csv.3' saved [257/257]</code></pre>
 </div>
 </div>
 <ol start="2" type="1">
 <li>Display the contents of the <code>students.csv</code> file using the <code>cat</code> command.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> students.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> students.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>ID,Name,Age,Gender,Grade,Subject
 1,Alice,20,F,88,Math
@@ -244,55 +246,122 @@ Saving to: 'students.csv.1'
 <li>Display only the first 5 lines of the file using <code>head</code> to show the first few lines.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add your solution here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> <span class="at">-n</span> 5 students.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>ID,Name,Age,Gender,Grade,Subject
+1,Alice,20,F,88,Math
+2,Bob,22,M,76,History
+3,Charlie,23,M,90,Math
+4,Diana,21,F,85,Science</code></pre>
+</div>
 </div>
 <ol start="4" type="1">
 <li>Display only the last 3 lines of the file using <code>tail</code> to show the last few lines.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add your solution here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> <span class="at">-n</span> 3 students.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>8,Heidi,21,F,88,Math
+9,Ivan,20,M,85,Science
+10,Judy,22,F,79,History</code></pre>
+</div>
 </div>
 <ol start="5" type="1">
 <li>Count the number of lines in the file using the <code>wc</code> command to count the lines.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add your solution here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-l</span> students.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>10 students.csv</code></pre>
+</div>
 </div>
 <ol start="6" type="1">
 <li>Find all students who are taking “Math” as a subject using <code>grep</code> to filter lines with the subject “Math”.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add your solution here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-w</span> <span class="st">"Math"</span> students.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1,Alice,20,F,88,Math
+3,Charlie,23,M,90,Math
+5,Eve,20,F,92,Math
+8,Heidi,21,F,88,Math</code></pre>
+</div>
 </div>
 <ol start="7" type="1">
 <li>Find all female students using <code>grep</code> or <code>awk</code> to filter based on gender.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add your solution here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-w</span> <span class="st">"F"</span> students.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1,Alice,20,F,88,Math
+4,Diana,21,F,85,Science
+5,Eve,20,F,92,Math
+7,Grace,23,F,78,Science
+8,Heidi,21,F,88,Math
+10,Judy,22,F,79,History</code></pre>
+</div>
 </div>
 <ol start="8" type="1">
 <li>Sort the file by the students’ ages in ascending order. Use <code>sort</code> to order by the “Age” column.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add your solution here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span> <span class="at">-t,</span> <span class="at">-n</span> <span class="at">-k3</span> students.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>ID,Name,Age,Gender,Grade,Subject
+1,Alice,20,F,88,Math
+5,Eve,20,F,92,Math
+9,Ivan,20,M,85,Science
+4,Diana,21,F,85,Science
+8,Heidi,21,F,88,Math
+10,Judy,22,F,79,History
+2,Bob,22,M,76,History
+6,Frank,22,M,72,History
+3,Charlie,23,M,90,Math
+7,Grace,23,F,78,Science</code></pre>
 </div>
-<ol type="1">
+</div>
+<ol start="9" type="1">
 <li>Find the unique subjects listed in the file. Use <code>cut</code>, <code>sort</code>, and <code>uniq</code> to extract unique subjects.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add your solution here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-d,</span> <span class="at">-f6</span> students.csv <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>History
+Math
+Science
+Subject</code></pre>
+</div>
 </div>
 <ol start="10" type="1">
 <li>Calculate the average grade of the students. Use <code>awk</code> to sum the grades and divide by the number of students.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add your solution here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F,</span> <span class="st">'{sum += $5} END {print "Average grade:", sum / NR}'</span> students.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Average grade: 75.7273</code></pre>
+</div>
 </div>
 <ol start="11" type="1">
 <li>Replace all occurrences of “Math” with “Mathematics” in the file. Use <code>sed</code> to perform the replacement.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add your solution here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add your solution here</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-i</span> <span class="st">'s/Math/Mathematics/g'</span> students.csv</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> students.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>ID,Name,Age,Gender,Grade,Subject
+1,Alice,20,F,88,Mathematics
+2,Bob,22,M,76,History
+3,Charlie,23,M,90,Mathematics
+4,Diana,21,F,85,Science
+5,Eve,20,F,92,Mathematics
+6,Frank,22,M,72,History
+7,Grace,23,F,78,Science
+8,Heidi,21,F,88,Mathematics
+9,Ivan,20,M,85,Science
+10,Judy,22,F,79,History</code></pre>
+</div>
 </div>
 </section>
 
